@@ -1,5 +1,5 @@
 trigger:
-  paths:
+  branches:
     include:
       - Dev
 
@@ -10,7 +10,6 @@ resources:
       name: team-bicep-infrastructure
       ref: refs/heads/main
 
-
 extends:
   template: DockerBuildAndPush-template.yml@infra
   parameters:
@@ -18,6 +17,3 @@ extends:
     dockerfilePath: 'src/TeamBicep.WebApi/Dockerfile'
     contextPath: 'TeamBicep.WebApi'
     imageRepository: 'TeamBicep/Backend'
-
-
-    
