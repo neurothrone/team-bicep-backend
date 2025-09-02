@@ -22,7 +22,8 @@ stages:
           displayName: 'restoring project'
 
         - script: |
-            dotnet build --configuration Release
+            dotnet build src/**/*.csproj  --configuration Release
           displayName: 'Compile project'
+        
 
 
