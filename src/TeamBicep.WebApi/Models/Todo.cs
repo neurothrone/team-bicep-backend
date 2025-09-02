@@ -9,7 +9,8 @@ public class Todo
 
     [BsonElement("Name")]
     public string Name { get; set; } = string.Empty;
-    [BsonElememt("IsCompleted")]
+
+    [BsonElement("IsCompleted")]
     public bool IsCompleted { get; set; } = false;
 
 }
