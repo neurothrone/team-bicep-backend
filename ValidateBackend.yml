@@ -1,0 +1,29 @@
+trigger:
+  - dev
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+- stage: Build
+  jobs:
+    - job: Build
+      displayName: 'Build Project'
+      steps:
+        - checkout: self
+
+        - task: UseDotNet@2
+          inputs:
+            packageType: sdk
+            version: '8.x'
+            installationPath: $(Agent.ToolsDirectory)/dotnet
+        
+        - script: |
+             dotnet restore src/**/*.csproj
+          displayName: 'restoring project'
+
+        - script: |
+            dotnet build --configuration Release
+          displayName: 'Compile project'
+
+
