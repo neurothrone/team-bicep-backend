@@ -1,0 +1,23 @@
+trigger:
+  paths:
+    include:
+      - Dev
+
+resources:
+  repositories:
+    - repository: infra
+      type: git
+      name: team-bicep-infrastructure
+      ref: refs/heads/main
+
+
+extends:
+  template: DockerBuildAndPush-template.yml@infra
+  parameters:
+    projectName: 'TeamBicep.WebApi'
+    dockerfilePath: 'src/TeamBicep.WebApi/Dockerfile'
+    contextPath: 'TeamBicep.WebApi'
+    imageRepository: 'TeamBicep/Backend'
+
+
+    
