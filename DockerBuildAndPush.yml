@@ -15,5 +15,5 @@ extends:
   parameters:
     projectName: 'TeamBicep.WebApi'
     dockerfilePath: 'src/TeamBicep.WebApi/Dockerfile'
-    contextPath: 'TeamBicep.WebApi'
+    contextPath: 'src/TeamBicep.WebApi'
     imageRepository: 'TeamBicep/Backend'
