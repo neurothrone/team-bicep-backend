@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using TeamBicep.WebApi.Models;
 using TeamBicep.WebApi.Repositories;
@@ -36,6 +37,20 @@ app.MapPost(
         return Results.Created();
     }
 );
+
+app.MapGet("api/todo", async (ITodoRepository repo) =>
+{
+   var todo = await repo.GetAllAsync();
+    foreach (var item in todo)
+    {
+        Console.WriteLine(item.Name);
+    }
+   
+    return Results.Ok(todo);
+    
+});
+
+    
 
 app.UseHttpsRedirection();
 
