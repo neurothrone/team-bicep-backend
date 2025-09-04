@@ -37,10 +37,7 @@ app.MapPost(
         return Results.Created();
     }
 );
-app.MapGet(
-    "api/todo",
-    async (ITodoRepository repo) => await repo.GetAllAsync()
-);
+
 
 app.MapGet("api/todo", async (ITodoRepository repo) =>
 {
