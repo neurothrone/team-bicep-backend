@@ -5,7 +5,7 @@ using TeamBicep.WebApi.Repositories;
 using TeamBicep.WebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-
+//testing
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -36,6 +36,10 @@ app.MapPost(
         await repo.AddAsync(todo);
         return Results.Created();
     }
+);
+app.MapGet(
+    "api/todo",
+    async (ITodoRepository repo) => await repo.GetAllAsync()
 );
 
 app.MapGet("api/todo", async (ITodoRepository repo) =>
