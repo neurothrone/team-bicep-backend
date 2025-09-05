@@ -17,7 +17,7 @@ public class TodoRepository(IMongoDatabase db) : ITodoRepository
             .ToListAsync();
     }
 
-    public async Task<Todo> GetByIdAsync(string id)
+    public async Task<Todo?> GetByIdAsync(string id)
     {
         var collection = db.GetCollection<Todo>(CollectionName);
         var filter = Builders<Todo>.Filter.Eq("_id", ObjectId.Parse(id));
@@ -32,9 +32,8 @@ public class TodoRepository(IMongoDatabase db) : ITodoRepository
         await collection.InsertOneAsync(todo);
         return todo;
     }
-    
-    // TODO: Add Update By Id Method
-    public async Task<Todo> UpdateByIdAsync(string id, Todo todo)
+
+    public async Task<Todo?> UpdateByIdAsync(string id, Todo todo)
     {
         var collection = db.GetCollection<Todo>(CollectionName);
         var filter = Builders<Todo>.Filter.Eq("_id", ObjectId.Parse(id));
@@ -48,11 +47,11 @@ public class TodoRepository(IMongoDatabase db) : ITodoRepository
         return await collection.FindOneAndUpdateAsync(filter, update, options);
     }
 
-    // TODO: Add Delete By Id Method
-    public async Task<Todo> DeleteByIdAsync(string id)
+    public async Task<bool> DeleteByIdAsync(string id)
     {
         var collection = db.GetCollection<Todo>(CollectionName);
         var filter = Builders<Todo>.Filter.Eq("_id", ObjectId.Parse(id));
-        return await collection.FindOneAndDeleteAsync(filter);
+        var result = await collection.DeleteOneAsync(filter);
+        return result.DeletedCount > 0;
     }
 }
