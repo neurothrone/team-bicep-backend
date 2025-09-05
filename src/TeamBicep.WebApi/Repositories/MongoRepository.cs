@@ -1,7 +1,5 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
-using TeamBicep.WebApi.Models;
-using TeamBicep.WebApi.Services;
 
 namespace TeamBicep.WebApi.Repositories;
 
