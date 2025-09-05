@@ -19,9 +19,10 @@ public static class TodoEndpoints
 
         // TODO: Add Get Todo By Id Endpoint
 
-        group.MapPost(string.Empty, async (Todo todo, ITodoRepository repo) =>
+        group.MapPost(string.Empty, async (InputTodo todo, ITodoRepository repo) =>
         {
-            var insertedTodo = await repo.AddAsync(todo);
+            var todoToCreate = new Todo { Name = todo.Name, Completed = todo.Completed };
+            var insertedTodo = await repo.AddAsync(todoToCreate);
             return Results.Created($"/api/todos/{insertedTodo.Id}", insertedTodo);
         });
 
