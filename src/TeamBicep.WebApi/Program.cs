@@ -1,15 +1,14 @@
-using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
-using TeamBicep.WebApi.Models;
+using TeamBicep.WebApi.Endpoints;
 using TeamBicep.WebApi.Repositories;
-using TeamBicep.WebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-//testing
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// !: Add services here
 builder.Services.AddSingleton<IMongoClient>(_ => new MongoClient(
     builder.Configuration["Mongo:ConnectionString"]
 ));
@@ -18,8 +17,8 @@ builder.Services.AddSingleton<IMongoDatabase>(sp =>
     var client = sp.GetRequiredService<IMongoClient>();
     return client.GetDatabase(builder.Configuration["Mongo:Database"]);
 });
-
 builder.Services.AddScoped<ITodoRepository, TodoRepository>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -29,30 +28,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapPost(
-    "api/todo",
-    async (Todo todo, ITodoRepository repo) =>
-    {
-        await repo.AddAsync(todo);
-        return Results.Created();
-    }
-);
-
-
-app.MapGet("api/todo", async (ITodoRepository repo) =>
-{
-   var todo = await repo.GetAllAsync();
-    foreach (var item in todo)
-    {
-        Console.WriteLine(item.Name);
-    }
-   
-    return Results.Ok(todo);
-    
-});
-
-    
-
 app.UseHttpsRedirection();
+
+// !: Map endpoints here
+app.MapTodoEndpoints();
 
 app.Run();
