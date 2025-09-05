@@ -1,5 +1,5 @@
 @ApiBaseUrl = http://localhost:5001/api
-@TodoId = 68ba93f8d437c980da7363c0
+@TodoId = 68bb30cf1c2327559042a268
 
 
 ### Get All Todos
@@ -17,7 +17,7 @@ Accept: application/json
 
 {
   "name": "Find the Holy Grail",
-  "isCompleted": false
+  "completed": false
 }
 
 ### Update an Existing Todo
@@ -27,7 +27,7 @@ Accept: application/json
 
 {
   "name": "Find the Holy Grail - Updated",
-  "isCompleted": true
+  "completed": true
 }
 
 ### Delete a Todo
