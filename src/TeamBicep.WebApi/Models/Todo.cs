@@ -9,9 +9,9 @@ public class Todo
     [BsonRepresentation(BsonType.ObjectId)]
     public string Id { get; set; } = string.Empty;
 
-    [BsonElement("Name")]
+    [BsonElement("name")]
     public string Name { get; set; } = string.Empty;
-    [BsonElement("IsCompleted")]
-    public bool IsCompleted { get; set; } = false;
 
+    [BsonElement("completed")]
+    public bool Completed { get; set; } = false;
 }
