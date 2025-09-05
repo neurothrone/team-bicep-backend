@@ -1,6 +1,35 @@
-@ApiBaseUrl = http://localhost:5001
+@ApiBaseUrl = http://localhost:5001/api
+@TodoId = 68ba93f8d437c980da7363c0
 
 
-### Get Weather Forecast
-GET {{ApiBaseUrl}}/weatherforecast/
+### Get All Todos
+GET {{ApiBaseUrl}}/todos
+Accept: application/json
+
+### Get Todo by ID
+GET {{ApiBaseUrl}}/todos/{{TodoId}}
+Accept: application/json
+
+### Create a New Todo
+POST {{ApiBaseUrl}}/todos
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Find the Holy Grail",
+  "isCompleted": false
+}
+
+### Update an Existing Todo
+PUT {{ApiBaseUrl}}/todos/{{TodoId}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Find the Holy Grail - Updated",
+  "isCompleted": true
+}
+
+### Delete a Todo
+DELETE {{ApiBaseUrl}}/todos/{{TodoId}}
 Accept: application/json
