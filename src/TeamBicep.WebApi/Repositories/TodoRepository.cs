@@ -34,6 +34,25 @@ public class TodoRepository(IMongoDatabase db) : ITodoRepository
     }
     
     // TODO: Add Update By Id Method
-    
+    public async Task<Todo> UpdateByIdAsync(string id, Todo todo)
+    {
+        var collection = db.GetCollection<Todo>(CollectionName);
+        var filter = Builders<Todo>.Filter.Eq("_id", ObjectId.Parse(id));
+        var update = Builders<Todo>.Update
+            .Set(t => t.Name, todo.Name)
+            .Set(t => t.Completed, todo.Completed);
+        var options = new FindOneAndUpdateOptions<Todo>
+        {
+            ReturnDocument = ReturnDocument.After
+        };
+        return await collection.FindOneAndUpdateAsync(filter, update, options);
+    }
+
     // TODO: Add Delete By Id Method
+    public async Task<Todo> DeleteByIdAsync(string id)
+    {
+        var collection = db.GetCollection<Todo>(CollectionName);
+        var filter = Builders<Todo>.Filter.Eq("_id", ObjectId.Parse(id));
+        return await collection.FindOneAndDeleteAsync(filter);
+    }
 }
