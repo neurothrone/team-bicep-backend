@@ -10,10 +10,6 @@ Accept: application/json
 GET {{ApiBaseUrl}}/todos/{{TodoId}}
 Accept: application/json
 
-
-
-
-
 ### Create a New Todo
 POST {{ApiBaseUrl}}/todos
 Content-Type: application/json
