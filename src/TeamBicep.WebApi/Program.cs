@@ -1,5 +1,5 @@
 using MongoDB.Driver;
-using TeamBicep.WebApi.Models;
+using TeamBicep.WebApi.Endpoints;
 using TeamBicep.WebApi.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Add MongoDB services
+// !: Add services here
 builder.Services.AddSingleton<IMongoClient>(_ => new MongoClient(
     builder.Configuration["Mongo:ConnectionString"]
 ));
@@ -28,21 +28,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.MapPost(
-    "api/todos",
-    async (Todo todo, ITodoRepository repo) =>
-    {
-        await repo.AddAsync(todo);
-        return Results.Created();
-    }
-);
-
-app.MapGet("api/todos", async (ITodoRepository repo) =>
-{
-    var todo = await repo.GetAllAsync();
-    return Results.Ok(todo);
-});
-
 app.UseHttpsRedirection();
+
+// !: Map endpoints here
+app.MapTodoEndpoints();
 
 app.Run();
