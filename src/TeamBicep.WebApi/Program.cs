@@ -30,7 +30,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+
 // !: Map endpoints here
+app.MapGet("/", () => "Team Bicep System operational");
 app.MapTodoEndpoints();
 
 app.Run();
