@@ -1,5 +1,5 @@
-@ApiBaseUrl = http://localhost:5001/api
-@TodoId = 68bb30cf1c2327559042a268
+@ApiBaseUrl = https://localhost:7001/api
+@TodoId = 68ba9a1b9c02293c1d4dae4f
 
 
 ### Get All Todos
